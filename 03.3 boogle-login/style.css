@@ -1,0 +1,126 @@
+.VYMape {
+    background:#fff;
+    direction:ltr;
+    left:0;
+    overflow:hidden;
+    position:fixed;
+    right:0;
+    top:0;
+    width:4000px;
+    z-index:-1;
+}
+
+.blue {
+    color:#4285f4;
+}
+
+.button {
+    left:148px;
+    position:relative;
+}
+
+.content {
+    margin:0 auto;
+    position:relative;
+    text-align:left;
+    top:40px;
+    width:370px;
+}
+
+.footer {
+    font-family:Roboto,sans-serif;
+    margin:20px auto;
+    right:0;
+    text-align:left;
+    width:450px;
+}
+
+.g12 {
+    font-family:Roboto,sans-serif;
+    font-size:12px;
+    padding:0;
+}
+
+.g14 {
+    font-family:Roboto,sans-serif;
+    font-size:14px;
+    padding:0;
+}
+
+.google {
+    font-family:Roboto,sans-serif;
+    font-size:24px;
+    line-height:90%;
+    padding:0;
+}
+
+.login {
+    background-color:#FFF;
+    box-shadow:0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    height:500px;
+    margin-left:auto;
+    margin-right:auto;
+    width:450px;
+    z-index:1;
+}
+
+.middle {
+    display:table-cell;
+    vertical-align:middle;
+}
+
+.outer {
+    display:table;
+    height:100%;
+    left:0;
+    position:absolute;
+    top:0;
+    width:100%;
+}
+
+body,html {
+    margin:0;
+    text-align:center;
+}
+
+button {
+    background-color:#4285f4;
+    border:none;
+    border-radius:3px;
+    box-shadow:0 2px 4px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    color:#FFF;
+    cursor:pointer;
+    font-weight:700;
+    margin:4px 2px;
+    padding:10px 15px;
+    text-decoration:none;
+}
+
+input {
+    border:none;
+    border-bottom:1px solid #dbdbdb;
+    font-size:15px;
+    padding:10px 0 5px;
+    transition:border .3s;
+    width:100%;
+}
+
+input:focus {
+    border-bottom:2px solid #4285f4;
+    outline:none;
+}
+
+td {
+    color:#757575;
+    font-family:Roboto,sans-serif;
+    font-size:12px;
+    line-height:1.4;
+}
+
+td:first-child {
+    color:#000;
+}
+
+td:last-child {
+    text-align:right;
+}
