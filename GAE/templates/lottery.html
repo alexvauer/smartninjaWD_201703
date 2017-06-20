@@ -3,10 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>Lottery</title>
+
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
 
-Your Lucky numbers are: {{lottery_numbers}}
+
+<div class="container">
+<h4>Your Lucky numbers are:</h4>
+<div class="btn-group btn-group-lg" role="group" aria-label="">
+
+    {% for numbers in lottery_numbers %}
+
+    <button type="button" class="btn btn-default">{{numbers}}</button>
+
+
+    {% endfor %}
+
+</div>
+
+
+
+</div>
 
 </body>
 </html>

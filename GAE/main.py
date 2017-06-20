@@ -28,6 +28,9 @@ class BaseHandler(webapp2.RequestHandler):
     def render_template(self, view_filename, params=None):
         if not params:
             params = {}
+
+        params['css-nav']= ''
+        params['navbar']= ''
         template = jinja_env.get_template(view_filename)
         self.response.out.write(template.render(params))
 
@@ -47,12 +50,11 @@ class TimeHandler(BaseHandler):
         return self.render_template("time.html", params=params)
 
 class LotteryHandler(BaseHandler):
-    def lottery(numbers):
+    def lottery(self,numbers):
         lowerBound = 1
         upperBound = 45
         number = 0
         lottery_numbers = []
-
 
         if numbers > 45:
             print "Maximum 45 numbers: set to 45"
@@ -68,7 +70,7 @@ class LotteryHandler(BaseHandler):
 
     def get(self):
         lottonumbers = 6
-        lottery_numbers = self.lottery(lottonumbers)
+        lottery_numbers = sorted(self.lottery(lottonumbers))
         params = {'lottery_numbers': lottery_numbers}
         return self.render_template("lottery.html", params=params)
 
