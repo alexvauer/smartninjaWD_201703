@@ -1,0 +1,4 @@
+Opel,Manta,20000,200-20-20
+Mercedes ,Sprinter,,
+Opel,Kadett,1985,11
+Ferrari,Testarossa,0,2020-20-12
