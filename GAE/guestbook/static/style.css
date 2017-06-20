@@ -1,0 +1,12 @@
+.bottom-buffer {
+    margin-bottom:20px;
+}
+
+.bottom-bigbuffer {
+    margin-bottom:100px;
+}
+
+.allmessages {
+    border-top: 5px solid grey;
+    background-color: powderblue;
+}
