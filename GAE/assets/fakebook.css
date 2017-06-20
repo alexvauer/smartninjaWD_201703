@@ -1,0 +1,37 @@
+.fake
+    {
+    font-family:calibri;
+    position:fixed;
+    color:#1cc28b;
+    background:white;
+    padding:40px;
+    margin: 5px 5px 0 0;
+    right:0;
+    top:0;}
+
+#search {display: inline;
+	position: fixed;
+	top: 200px;
+	right:5px;
+	background:#1cc28b;
+	padding: 5px;
+	}
+
+body {
+	color: white; background: #566666;
+}
+
+p {font-family: Arial;}
+
+
+.profile {
+   width: 750px;
+   margin-left: auto;
+   margin-right: auto;
+   background: #a9adb5;
+   padding: 10px;
+   position: relative;
+   text-align: centre;
+   z-index: -1;
+   }
+

@@ -1,0 +1,45 @@
+.blackback {
+    background-color: black;
+}
+
+.blacky {
+    background-color: black;
+    color:white; }
+
+.bigy {
+            font-family:"Helvetica";
+            font-size: 7em;
+    }
+.smaly {
+            font-family:"Helvetica";
+            font-size: 1.5em;
+    }
+
+.bottom-buffer {
+        margin-bottom:20px;
+    }
+
+.top-buffer {
+        margin-top:40px;
+    }
+
+.bottom-bigbuffer {
+        margin-bottom:40px;
+    }
+
+.allmessages {
+        background-image: url('https://media.giphy.com/media/sRrwieE6IL1qE/giphy.gif');
+        background-size: cover;
+    }
+
+.bordery {
+    border: 1px solid grey;
+}
+
+.panel,
+.panel-heading,
+.panel-title,
+.panel-body,
+.panel-footer {
+background-color: rgba(245, 245, 245, 0.3);
+}
