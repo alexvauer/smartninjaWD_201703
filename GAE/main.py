@@ -2,7 +2,6 @@
 import datetime
 import os
 import random
-
 import jinja2
 import webapp2
 
@@ -154,6 +153,74 @@ class CalcHandler(BaseHandler):
                       "fail": fail}
             return self.render_template("calculator.html", params=params)
 
+class SecretHandler(BaseHandler):
+    def get(self):
+        return self.render_template("secretnumber.html", params={'first': 1})
+
+    def post(self):
+        lowerBound = 1
+        upperBound = 45
+
+        secret = random.randint(lowerBound, upperBound)
+
+        try:
+            number = int(self.request.get("number1"))
+
+            if int(number) == secret:
+                right = 1
+                fail = ""
+
+            elif 1 < int(number) > 45:
+                right= 0
+                fail = "Insert a number between 1 and 45"
+
+            else:
+                right = 0
+                fail =""
+
+            params = {"right":right, "secret": secret, 'number': number, 'fail':fail}
+            return self.render_template("secretnumber.html", params=params)
+
+        except:
+            right = 0
+            fail = "Please type in numbers"
+            params = {"right":right, "secret": secret, 'fail':fail}
+            return self.render_template("secretnumber.html", params=params)
+
+
+class SecretFollowHandler(BaseHandler):
+    def post(self):
+
+        secret = int(self.request.get("secret"))
+
+        try:
+            number = int(self.request.get("number1"))
+
+            if int(number) == secret:
+                right = 1
+                fail = ""
+
+            elif int(number) > 45:
+                right= 0
+                fail = "Insert a number between 1 and 45"
+            elif int(number) < 1:
+                right= 0
+                fail = "Insert a number between 1 and 45"
+
+            else:
+                right = 0
+                fail = ""
+
+            params = {"right": right, "secret": secret, 'number': number, 'fail': fail}
+            return self.render_template("secretnumber.html", params=params)
+
+        except:
+            right = 0
+            fail = "Please type in numbers"
+            params = {"right": right, "secret": secret, 'fail': fail}
+            return self.render_template("secretnumber.html", params=params)
+
+
 
 
 class GuestbookHandler(BaseHandler):
@@ -178,12 +245,17 @@ class GuestbookHandler(BaseHandler):
         return self.render_template("guestbook.html", params=params)
 
 
+
+
 app = webapp2.WSGIApplication([
     webapp2.Route('/', MainHandler),
     webapp2.Route('/guestbook', GuestbookHandler),
     webapp2.Route('/fakebook', FakebookHandler),
     webapp2.Route('/time', TimeHandler),
     webapp2.Route('/lottery', LotteryHandler),
-    webapp2.Route('/calc', CalcHandler)
+    webapp2.Route('/calc', CalcHandler),
+    webapp2.Route('/secretnumber', SecretHandler),
+    webapp2.Route('/secretnumberfollow', SecretFollowHandler),
+
 
 ], debug=True)
