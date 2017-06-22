@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+</head>
+<body>
+<div class="container">
+    <h4>Calculator</h4>
+    <p>Put in the two numbers you want to calculate<br>
+        and choose the operation, then Press
+        <button type="submit" class="btn">=</button>
+    </p>
+
+    <form class="form-inline" method="post">
+        <div class="form-group">
+            <label for="number1">#1</label>
+            <input type="number" class="form-control" id="number1" name="number1" value="{{number1}}">
+        </div>
+        <br><br>
+
+        <label class="radio-inline"><input type="radio" id="add" value="add" name="operation">+</label>
+        <label class="radio-inline"><input type="radio" id="sub" value="sub" name="operation">-</label>
+        <label class="radio-inline"><input type="radio" id="multi" value="multi" name="operation">*</label>
+        <label class="radio-inline"><input type="radio" id="divi" value="divi" name="operation">/</label>
+        <br><br>
+        <div class="form-group">
+            <label for="number2">#2</label>
+            <input type="number" class="form-control" id="number2" name="number2" value="{{number2}}">
+        </div>
+        <br><br>
+        <button type="submit" class="btn btn-lg">=</button>
+    </form>
+</div>
+<br><br>
+{%if result%}
+<div class="container">
+    <div class="btn-group btn-group-lg" role="group" aria-label="">
+        <button type="button" class="btn btn-default">{{number1}}</button>
+        <button type="button" class="btn btn-default">{{operator}}</button>
+        <button type="button" class="btn btn-default">{{number2}}</button>
+        <button type="button" class="btn btn-default">=</button>
+            {%if result%}
+                <button type="button" class="btn btn-success">{{result}}</button>
+            {%endif%}
+            {%if fail%}
+                {%for fails in fail %}
+                <button type="button" class="btn btn-danger">{{fails}}</button>
+                {%endfor%}
+            {%endif%}
+
+    </div>
+    {%endif%}
+</body>
+</html>

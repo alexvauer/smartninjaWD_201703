@@ -20,8 +20,11 @@ class Vehicle(object):
 
     def edit(self,km2,date2):
 
-        self.km = km2
-        self.service_date = date2
+        if km2:
+            self.km = km2
+
+        if date2:
+            self.service_date = date2
 
 
 

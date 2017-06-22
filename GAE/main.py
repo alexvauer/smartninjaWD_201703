@@ -12,8 +12,6 @@ template_dir = os.path.join(os.path.dirname(__file__), "templates")
 jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir), autoescape=False)
 
 
-
-
 class BaseHandler(webapp2.RequestHandler):
     def write(self, *a, **kw):
         self.response.out.write(*a, **kw)
@@ -29,8 +27,8 @@ class BaseHandler(webapp2.RequestHandler):
         if not params:
             params = {}
 
-        params['css-nav']= ''
-        params['navbar']= ''
+        params['css-nav'] = ''
+        params['navbar'] = ''
         template = jinja_env.get_template(view_filename)
         self.response.out.write(template.render(params))
 
@@ -39,18 +37,21 @@ class MainHandler(BaseHandler):
     def get(self):
         return self.render_template("index.html")
 
+
 class FakebookHandler(BaseHandler):
     def get(self):
         return self.render_template("fakebook.html")
 
+
 class TimeHandler(BaseHandler):
     def get(self):
         tt = str(datetime.datetime.now())
-        params = {'currenttime':tt[11:19]}
+        params = {'currenttime': tt[11:19]}
         return self.render_template("time.html", params=params)
 
+
 class LotteryHandler(BaseHandler):
-    def lottery(self,numbers):
+    def lottery(self, numbers):
         lowerBound = 1
         upperBound = 45
         number = 0
@@ -73,6 +74,85 @@ class LotteryHandler(BaseHandler):
         lottery_numbers = sorted(self.lottery(lottonumbers))
         params = {'lottery_numbers': lottery_numbers}
         return self.render_template("lottery.html", params=params)
+
+
+class CalcHandler(BaseHandler):
+    def get(self):
+        return self.render_template("calculator.html")
+
+    def post(self):
+        try:
+            result = ""
+            fail = []
+            number1 = float(self.request.get("number1"))
+            number2 = float(self.request.get("number2"))
+            operator = self.request.get("operation")
+
+            if not number1:
+                if number1 != 0:
+                    fail.append("Type in Number 1")
+
+            if not operator:
+                operator = "?"
+                result = "?"
+                fail.append("Choose an operator")
+
+            if not number2:
+                if number2 != 0:
+                    fail.append("Type in Number 2")
+
+            if operator == "add":
+                result = number1 + number2
+                operator = "+"
+
+            if operator == "sub":
+                result = number1 - number2
+                operator = "-"
+
+            if operator == "multi":
+                result = number1 * number2
+                operator = "x"
+
+            if operator == "divi":
+                operator = "/"
+                if number2 == 0:
+                    fail.append("Div through 0")
+                    result = "?"
+                else:
+                    result = number1 / number2
+
+            params = {"number1": str(number1), "number2": str(number2), "result": str(result), "operator": operator,
+                      "fail": fail}
+            return self.render_template("calculator.html", params=params)
+        except:
+            result = ""
+            fail = []
+            number1 = self.request.get("number1")
+            number2 = self.request.get("number2")
+            operator = self.request.get("operation")
+
+            if not number1:
+                fail.append("Type in Number 1")
+                number1 ="?"
+                if number2:
+                    number2 = float(number2)
+
+            if not operator:
+                operator = "?"
+                result = "?"
+                fail.append("Choose an operator")
+
+
+            if not number2:
+                fail.append("Type in Number 2")
+                number2 = "?"
+                if number1:
+                    number1 = float(number1)
+
+
+            params = {"number1": str(number1), "number2": str(number2), "result": str(result), "operator": operator,
+                      "fail": fail}
+            return self.render_template("calculator.html", params=params)
 
 
 
@@ -98,12 +178,12 @@ class GuestbookHandler(BaseHandler):
         return self.render_template("guestbook.html", params=params)
 
 
-
 app = webapp2.WSGIApplication([
     webapp2.Route('/', MainHandler),
     webapp2.Route('/guestbook', GuestbookHandler),
     webapp2.Route('/fakebook', FakebookHandler),
     webapp2.Route('/time', TimeHandler),
-    webapp2.Route('/lottery', LotteryHandler)
+    webapp2.Route('/lottery', LotteryHandler),
+    webapp2.Route('/calc', CalcHandler)
 
 ], debug=True)
