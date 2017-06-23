@@ -42,7 +42,7 @@
     <div class="form-group row">
     <label class="col-sm-2 col-form-label" for="g_text">Message</label>
         <div class="col-sm-10">
-            <textarea class="form-control" id="g_text" name="g_text" type="text" placeholder="Text" rows="4" required></textarea>
+            <textarea class="form-control" id="g_text" name="g_text" type="text" placeholder="Text" rows="6" required></textarea>
         </div>
     </div>
 
@@ -65,17 +65,40 @@
   {% for message in messages %}
 
 
-    <div class="panel panel-default">
+    <div class="panel panel-default"">
     <div class="panel-heading">
-      <h4 class="panel-title">
-          <a data-toggle="collapse" href="#{{ message.name }}"><bold>{{ message.name }}</bold></a> - {{ message.email }}
-      </h4>
+       <table width="100%">
+       <tr>
+         <td>
+       <h4 class="panel-title text-left">
+       <a data-toggle="collapse" href="#{{ message.key.id() }}"><bold>{{ message.name }}</bold></a> - {{ message.email }}
+       </h4></td><td>
+       <p class="text-right">
+           <a href="/guestbook/message/{{ message.key.id() }}/edit">
+               <button type="button" class="btn btn-default btn-lg">
+                <span class="glyphicon glyphicon-edit" aria-hidden="true">
+                </span>
+               </button>
+           </a>
+           <a href="/guestbook/message/{{ message.key.id() }}/delete">
+               <button type="button" class="btn btn-default btn-lg">
+                   <span class="glyphicon glyphicon-trash" aria-hidden="true">
+
+                   </span></button>
+           </a>
+        </p></td>
+       </tr>
+       </table>
     </div>
 
 
-    <div id="{{ message.name }}" class="panel-collapse-show">
+    <div id="{{ message.key.id()}}" class="panel-collapse in">
       <div class="panel-body message">{{ message.text }}</div>
-      <div class="panel-footer">{{ message.created }}</div>
+      <div class="panel-footer">{{ message.created }}
+
+
+
+      </div>
     </div>
   </div>
 

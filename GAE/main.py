@@ -4,6 +4,7 @@ import os
 import random
 import jinja2
 import webapp2
+import cgi
 
 from models import GMessages
 
@@ -220,7 +221,57 @@ class SecretFollowHandler(BaseHandler):
             params = {"right": right, "secret": secret, 'fail': fail}
             return self.render_template("secretnumber.html", params=params)
 
+class ConvertHandler(BaseHandler):
+    def get(self):
+        return self.render_template("convert.html")
 
+    def post(self):
+        con_mikm = 0.621371
+        con_kmmi = 1.60934
+
+
+        kilometers = self.request.get("kilometer")
+        miles = self.request.get("miles")
+
+        if kilometers and not miles:
+            miles = float(kilometers)*con_mikm
+            kilometers = float(kilometers)
+            kilometers2 = 0
+            miles2 = 0
+
+        elif miles and not kilometers:
+            kilometers = float(miles)*con_kmmi
+            miles = float(miles)
+            kilometers2=0
+            miles2=0
+
+        elif miles and kilometers:
+            kilometers2 = float(miles) * con_kmmi
+            miles2 = float(kilometers) * con_mikm
+            miles = float(miles)
+            kilometers = float(kilometers)
+
+        elif not miles and not kilometers:
+            kilometers = 0
+            miles = 0
+            kilometers2 = 0
+            miles2 = 0
+
+        params = {'kilometer': round(kilometers,2), 'miles': round(miles,2), 'kilometers2': kilometers2, 'miles2':miles2 }
+        return self.render_template("convert.html", params=params)
+
+
+html_escape_table = {
+        "&": "&amp;",
+        '"': "&quot;",
+      "'": "&apos;",
+        ">": "&gt;",
+        "<": "&lt;",
+        }
+
+def html_escape(text):
+    """Produce entities within text."""
+    return "".join(html_escape_table.get(c,c) for c in text)
 
 
 class GuestbookHandler(BaseHandler):
@@ -230,9 +281,9 @@ class GuestbookHandler(BaseHandler):
         return self.render_template("guestbook.html", params=params)
 
     def post(self):
-        message = self.request.get("g_text")
-        name = self.request.get("g_name")
-        email = self.request.get("g_email")
+        message = html_escape(self.request.get("g_text"))
+        name = html_escape(self.request.get("g_name"))
+        email = html_escape(self.request.get("g_email"))
 
         if not name:
             name = "Anonymous"
@@ -245,17 +296,50 @@ class GuestbookHandler(BaseHandler):
         return self.render_template("guestbook.html", params=params)
 
 
+class EditMessageHandler(BaseHandler):
+    def get(self, message_id):
+        message = GMessages.get_by_id(int(message_id))
+        params = {"message": message}
+        return self.render_template("message_edit.html", params=params)
+
+    def post(self, message_id):
+        new_text = html_escape(self.request.get("g_text"))
+        new_mail = html_escape(self.request.get("g_email"))
+        new_name = html_escape(self.request.get("g_name"))
+        message = GMessages.get_by_id(int(message_id))
+        message.text = new_text
+        message.email = new_mail
+        message.name = new_name
+        message.put()
+        return self.redirect_to("msg-list")
+
+
+class DeleteMessageHandler(BaseHandler):
+    def get(self, message_id):
+        message = GMessages.get_by_id(int(message_id))
+        params = {"message": message}
+        return self.render_template("message_delete.html", params=params)
+
+    def post(self, message_id):
+        message = GMessages.get_by_id(int(message_id))
+        message.key.delete()
+        return self.redirect_to("msg-list")
+
+
 
 
 app = webapp2.WSGIApplication([
     webapp2.Route('/', MainHandler),
-    webapp2.Route('/guestbook', GuestbookHandler),
+    webapp2.Route('/guestbook', GuestbookHandler,name="msg-list"),
+    webapp2.Route('/guestbook/message/<message_id:\d+>/edit', EditMessageHandler),
+    webapp2.Route('/guestbook/message/<message_id:\d+>/delete', DeleteMessageHandler),
     webapp2.Route('/fakebook', FakebookHandler),
     webapp2.Route('/time', TimeHandler),
     webapp2.Route('/lottery', LotteryHandler),
     webapp2.Route('/calc', CalcHandler),
     webapp2.Route('/secretnumber', SecretHandler),
     webapp2.Route('/secretnumberfollow', SecretFollowHandler),
+    webapp2.Route('/convert', ConvertHandler),
 
 
 ], debug=True)

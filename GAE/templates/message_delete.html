@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Filton Guestbook Messaage:Delete</title>
+    <link rel="icon" href="http://d1ujqdpfgkvqfi.cloudfront.net/favicon-generator/htdocs/favicons/2015-01-23/abc44f78a8a0e9382c9425fe69280af7.ico">
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/assets/guestbook.css">
+    <style>
+
+    </style>
+</head>
+
+<body class="blackback">
+<div class="container blacky">
+    <div class="row bottom-buffer top-buffer blacky">
+        <p class="bigy">Filton guestbook!</p>
+        <h3 class="smaly">Do you really want to delete this message?</h3>
+
+    </div>
+    </div>
+<div class="container bottom-buffer blacky">
+    <form action="/guestbook/message/{{ message.key.id() }}/delete" method="post">
+        <button type="submit" class="btn btn-default btn-lg">YES, delete!</button>
+        <a href="/guestbook"  role="button"><button class="btn btn-lg">Cancel</button></a>
+    </form>
+</div>
+</body>

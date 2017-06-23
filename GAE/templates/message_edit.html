@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Filton Guestbook Messaage:Edit</title>
+    <link rel="icon" href="http://d1ujqdpfgkvqfi.cloudfront.net/favicon-generator/htdocs/favicons/2015-01-23/abc44f78a8a0e9382c9425fe69280af7.ico">
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/assets/guestbook.css">
+    <style>
+
+    </style>
+</head>
+
+<body class="blackback">
+<div class="container blacky">
+    <div class="row bottom-buffer top-buffer blacky">
+        <p class="bigy">Filton guestbook!</p>
+        <h3 class="smaly">Edit your message</h3>
+
+    </div>
+    </div>
+<div class="container bottom-buffer blacky">
+  <form action="/guestbook/message/{{ message.key.id() }}/edit" method="post">
+     <div class="form-group row">
+      <label for="g_name" class="col-sm-2 col-form-label">Name</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="g_name" name="g_name" type="text" value="{{ message.name }}" autofocus>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="g_email" class="col-sm-2 col-form-label">E-mail</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="g_email" name="g_email" type="email" value="{{ message.email }}" >
+      </div>
+    </div>
+
+    <div class="form-group row">
+    <label class="col-sm-2 col-form-label" for="g_text">Message</label>
+        <div class="col-sm-10">
+            <textarea class="form-control" id="g_text" name="g_text" type="text" rows="8" required>{{ message.text }}</textarea>
+        </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="offset-sm-4 col-sm-10">
+        <button type="submit" class="btn btn-default btn-lg">Edit</button>
+          <a href="/guestbook"  role="button"><button class="btn btn-lg">Cancel</button></a>
+      </div>
+    </div>
+  </form>
+</div>
+</body>

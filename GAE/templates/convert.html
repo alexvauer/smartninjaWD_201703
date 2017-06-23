@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Homework 16.3: Length unit converter</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <h4>Unit converter for miles to kilometers and vice versa</h4>
+
+    <form class="form-inline" method="post">
+        <div class="form-group">
+            <label for="kilometer">km&nbsp;</label>
+            <input type="number" class="form-control" min="0" step="0.01" id="kilometer" name="kilometer" value="{{kilometer}}">
+            <button type="submit" class="btn btn-lg">&lt;&gt;</button>
+            <label><input type="number" class="form-control" min="0" step="0.01" id="miles" name="miles" value="{{miles}}">&nbsp;mi</label>
+        </div>
+    </form>
+{%if kilometers2%}
+    <br><br>
+    <div class="btn-group btn-group-lg" role="group" aria-label="">
+        <button class="btn btn-lg">{{kilometer}}&nbsp;km</button>
+        <button class="btn btn-lg">=</button>
+        <button class="btn btn-lg">{{miles2}}&nbsp;mi</button>
+    </div>
+    <br>
+    <div class="btn-group btn-group-lg" role="group" aria-label="">
+        <button class="btn btn-lg">{{miles}}&nbsp;mi</button>
+        <button class="btn btn-lg">=</button>
+        <button class="btn btn-lg">{{kilometer2}}&nbsp;km</button>
+    </div>
+
+
+{%endif%}
+</div>
+
+</body>
+</html>

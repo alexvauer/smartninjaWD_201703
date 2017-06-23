@@ -1,10 +1,10 @@
 .blackback {
-    background-color: black;
+    background-color: #31929c;
 }
 
 .blacky {
-    background-color: black;
-    color:white; }
+    background-color: #31929c;
+    color:#fdd2a8; }
 
 .bigy {
             font-family:"Helvetica";
@@ -28,7 +28,7 @@
     }
 
 .allmessages {
-        background-image: url('https://media.giphy.com/media/sRrwieE6IL1qE/giphy.gif');
+        background-image: url('https://media.giphy.com/media/3oEjHFXd3MCHZidNGU/giphy-downsized-large.gif');
         background-size: cover;
     }
 
